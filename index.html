@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PredictBet AI - L'IA au service de vos pronostics sportifs</title>
+    <meta name="description" content="La plateforme mondiale de prédictions sportives optimisée par l'intelligence artificielle. Maximisez vos gains où que vous soyez.">
+    
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="ph-fill ph-trend-up"></i>
+                PredictBet <span>AI</span>
+            </a>
+            <nav class="nav-menu">
+                <a href="#comment-ca-marche" class="nav-link">Comment ça marche</a>
+                <a href="#fonctionnalites" class="nav-link">Fonctionnalités</a>
+                <a href="#resultats" class="nav-link">Résultats</a>
+                <a href="#tarifs" class="nav-link">Tarifs</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="#" data-modal="login" class="btn-text">Connexion</a>
+                <a href="#" data-modal="signup" class="btn btn-primary">S'inscrire</a>
+            </div>
+            <button class="menu-toggle" aria-label="Menu">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero" id="home">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="badge-new">
+                        <span class="badge-dot"></span>
+                        Disponible dans plus de 150 pays
+                    </div>
+                    <h1>Ne pariez plus au hasard. <br><span class="text-gradient">Pariez avec l'IA.</span></h1>
+                    <p class="hero-subtitle">PredictBet AI analyse des millions de données sportives en temps réel pour vous fournir les prédictions les plus précises et maximiser vos gains. Fiabilité à plus de 85%.</p>
+                    <div class="hero-cta-group">
+                        <a href="#tarifs" class="btn btn-primary btn-lg">Commencer maintenant</a>
+                        <a href="#comment-ca-marche" class="btn btn-outline btn-lg">Voir comment ça marche</a>
+                    </div>
+                    <div class="trust-indicators">
+                        <div class="avatars">
+                            <img src="https://i.pravatar.cc/100?img=11" alt="User" class="avatar">
+                            <img src="https://i.pravatar.cc/100?img=12" alt="User" class="avatar">
+                            <img src="https://i.pravatar.cc/100?img=33" alt="User" class="avatar">
+                            <div class="avatar-more">+2k</div>
+                        </div>
+                        <span class="trust-text">parieurs nous font déjà confiance</span>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="glass-card mockup-card">
+                        <div class="mockup-header">
+                            <i class="ph-fill ph-soccer-ball"></i> Ligue des Champions
+                        </div>
+                        <div class="mockup-match">
+                            <div class="team">Real Madrid</div>
+                            <div class="vs">VS</div>
+                            <div class="team">Man City</div>
+                        </div>
+                        <div class="prediction-bar">
+                            <div class="pred-label">
+                                <span>Victoire Real</span>
+                                <span class="text-gold">78%</span>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-fill" style="width: 78%"></div>
+                            </div>
+                        </div>
+                        <div class="mockup-badge">
+                            <i class="ph-fill ph-check-circle"></i> Prédiction IA Validée
+                        </div>
+                    </div>
+                    <div class="glow-orb"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMMENT CA MARCHE -->
+        <section class="how-it-works" id="comment-ca-marche">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Comment ça marche ?</h2>
+                    <p>En 3 étapes simples, transformez vos paris sportifs en investissements rentables.</p>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-icon"><i class="ph ph-database"></i></div>
+                        <h3>1. Collecte de données</h3>
+                        <p>Notre IA aspire et analyse des milliers de statistiques (historique, forme, météo, blessures) avant chaque match.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-icon"><i class="ph ph-cpu"></i></div>
+                        <h3>2. Analyse Prédictive</h3>
+                        <p>Les algorithmes de Machine Learning calculent les probabilités de résultats avec une précision inégalée.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-icon"><i class="ph ph-money"></i></div>
+                        <h3>3. Placez vos paris</h3>
+                        <p>Recevez nos pronostics fiables, placez vos paris et encaissez vos gains directement via Mobile Money.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FONCTIONNALITES -->
+        <section class="features" id="fonctionnalites">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Pourquoi choisir PredictBet AI ?</h2>
+                    <p>Une technologie de pointe pour des résultats concrets.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card glass-panel">
+                        <div class="feat-icon"><i class="ph ph-target"></i></div>
+                        <h4>Précision de 85%+</h4>
+                        <p>Nos modèles mathématiques surpassent l'intuition humaine avec des taux de réussite validés sur des milliers de matchs.</p>
+                    </div>
+                    <div class="feature-card glass-panel">
+                        <div class="feat-icon"><i class="ph ph-bell-ringing"></i></div>
+                        <h4>Alertes en Temps Réel</h4>
+                        <p>Recevez des notifications instantanées (WhatsApp, Email) dès qu'une opportunité en or (Value Bet) est détectée par l'IA.</p>
+                    </div>
+                    <div class="feature-card glass-panel">
+                        <div class="feat-icon"><i class="ph ph-chart-line-up"></i></div>
+                        <h4>Gestion de Bankroll</h4>
+                        <p>Des outils intégrés pour suivre vos gains, analyser votre ROI et sécuriser votre capital sur le long terme.</p>
+                    </div>
+                    <div class="feature-card glass-panel">
+                        <div class="feat-icon"><i class="ph ph-globe-hemisphere-east"></i></div>
+                        <h4>Couverture Multi-Sports</h4>
+                        <p>Football (Ligue 1, PL, LDC), Basketball (NBA), Tennis. Notre IA analyse les plus grandes compétitions mondiales.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULTATS RECENTS -->
+        <section class="results" id="resultats">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Nos Dernières Prédictions Validées</h2>
+                </div>
+                <div class="results-list">
+                    <div class="result-item">
+                        <div class="match-info">
+                            <span class="league">Premier League</span>
+                            <span class="teams">Arsenal vs Chelsea</span>
+                        </div>
+                        <div class="pred-detail">
+                            <span class="pred-type">Plus de 2.5 Buts</span>
+                            <span class="odds">Cote: 1.85</span>
+                        </div>
+                        <div class="status success"><i class="ph-fill ph-check-circle"></i> Gagné</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="match-info">
+                            <span class="league">NBA</span>
+                            <span class="teams">Lakers vs Warriors</span>
+                        </div>
+                        <div class="pred-detail">
+                            <span class="pred-type">Victoire Lakers</span>
+                            <span class="odds">Cote: 2.10</span>
+                        </div>
+                        <div class="status success"><i class="ph-fill ph-check-circle"></i> Gagné</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="match-info">
+                            <span class="league">La Liga</span>
+                            <span class="teams">Barcelone vs Séville</span>
+                        </div>
+                        <div class="pred-detail">
+                            <span class="pred-type">Les 2 équipes marquent: Non</span>
+                            <span class="odds">Cote: 1.95</span>
+                        </div>
+                        <div class="status success"><i class="ph-fill ph-check-circle"></i> Gagné</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TARIFS -->
+        <section class="pricing" id="tarifs">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Abonnements</h2>
+                    <p>Compatible avec les paiements locaux et internationaux (MTN, Orange, Airtel, M-Pesa, Moov, cartes, etc.). Aucun engagement.</p>
+                    <div class="payment-methods">
+                        <span class="momo-badge orange-money">Mobile Money</span>
+                        <span class="momo-badge moov-africa">Cartes Bancaires</span>
+                    </div>
+                </div>
+                <div class="pricing-grid">
+                    <!-- Basic -->
+                    <div class="price-card">
+                        <h3>Découverte</h3>
+                        <div class="price">Gratuit<span>/à vie</span></div>
+                        <p class="price-desc">Idéal pour tester nos prédictions.</p>
+                        <ul class="features-list">
+                            <li><i class="ph ph-check"></i> 1 prédiction gratuite / jour</li>
+                            <li><i class="ph ph-check"></i> Accès au canal Telegram public</li>
+                            <li class="disabled"><i class="ph ph-x"></i> Analyse détaillée IA</li>
+                            <li class="disabled"><i class="ph ph-x"></i> Alertes Value Bets</li>
+                        </ul>
+                        <a href="#" data-modal="signup" class="btn btn-outline w-100">Créer un compte</a>
+                    </div>
+                    <!-- Premium (Popular) -->
+                    <div class="price-card popular glass-panel">
+                        <div class="popular-badge">Le plus choisi</div>
+                        <h3>Pro</h3>
+                        <div class="price">10.000 FCFA<span>/mois</span></div>
+                        <p class="price-desc">Pour les parieurs réguliers.</p>
+                        <ul class="features-list">
+                            <li><i class="ph-fill ph-check-circle text-gold"></i> Prédictions illimitées</li>
+                            <li><i class="ph-fill ph-check-circle text-gold"></i> Taux de réussite > 80%</li>
+                            <li><i class="ph-fill ph-check-circle text-gold"></i> Groupe VIP WhatsApp</li>
+                            <li><i class="ph-fill ph-check-circle text-gold"></i> Alertes Value Bets (Push)</li>
+                        </ul>
+                        <a href="#" data-modal="signup" class="btn btn-primary w-100">S'abonner maintenant</a>
+                    </div>
+                    <!-- VIP -->
+                    <div class="price-card">
+                        <h3>Expert</h3>
+                        <div class="price">25.000 FCFA<span>/trimestre</span></div>
+                        <p class="price-desc">L'arsenal complet de l'investisseur.</p>
+                        <ul class="features-list">
+                            <li><i class="ph ph-check"></i> Tout du forfait Pro</li>
+                            <li><i class="ph ph-check"></i> Outil de gestion de Bankroll</li>
+                            <li><i class="ph ph-check"></i> Coach personnel (WhatsApp)</li>
+                            <li><i class="ph ph-check"></i> Accès API (Bientôt)</li>
+                        </ul>
+                        <a href="#" data-modal="signup" class="btn btn-outline w-100">S'abonner maintenant</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TEMOIGNAGES -->
+        <section class="testimonials" id="temoignages">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Ce qu'en pensent nos parieurs</h2>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card glass-panel">
+                        <div class="rating">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+                        <p>"Avant je perdais beaucoup d'argent sur des 'intuitions'. Depuis que j'utilise PredictBet AI, ma bankroll est en positif. L'abonnement est remboursé en un week-end !"</p>
+                        <div class="author">
+                            <img src="https://i.pravatar.cc/100?img=52" alt="Ibrahim C.">
+                            <div>
+                                <strong>Ibrahim C.</strong>
+                                <span>Ouagadougou</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card glass-panel">
+                        <div class="rating">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star-half"></i>
+                        </div>
+                        <p>"Les alertes WhatsApp sont géniales. Je reçois la prédiction, je valide sur mon bookmaker, c'est rapide et efficace. Merci à l'équipe !"</p>
+                        <div class="author">
+                            <img src="https://i.pravatar.cc/100?img=47" alt="Seydou T.">
+                            <div>
+                                <strong>Seydou T.</strong>
+                                <span>Bobo-Dioulasso</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq" id="faq">
+            <div class="container faq-container">
+                <div class="section-header">
+                    <h2>Questions Fréquentes</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item active">
+                        <button class="faq-question">Quels sports sont couverts par l'IA ? <i class="ph ph-caret-down"></i></button>
+                        <div class="faq-answer">
+                            <p>Actuellement, notre IA analyse principalement le Football (plus de 50 ligues majeures et mineures), le Basketball (NBA, Euroleague) et le Tennis (ATP, WTA). Nous ajoutons régulièrement de nouvelles compétitions.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Comment s'effectue le paiement de l'abonnement ? <i class="ph ph-caret-down"></i></button>
+                        <div class="faq-answer">
+                            <p>Nous acceptons les paiements locaux sécurisés via Orange Money et Moov Africa. Une fois le paiement validé, votre compte est activé instantanément.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">Les pronostics sont-ils sûrs à 100% ? <i class="ph ph-caret-down"></i></button>
+                        <div class="faq-answer">
+                            <p>Aucun pronostic sportif n'est sûr à 100%. Cependant, notre IA a un taux de réussite historique certifié de 85% sur les paris Value, ce qui permet de générer des bénéfices sur le long terme avec une bonne gestion de bankroll.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA FINAL -->
+        <section class="cta-section">
+            <div class="container cta-container glass-panel">
+                <h2>Prêt à dominer les bookmakers ?</h2>
+                <p>Rejoignez des dizaines de milliers de parieurs qui utilisent déjà l'intelligence artificielle à travers le monde.</p>
+                <a href="#" data-modal="signup" class="btn btn-primary btn-lg">Créer un compte gratuitement</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <i class="ph-fill ph-trend-up"></i>
+                        PredictBet <span>AI</span>
+                    </a>
+                    <p>La plateforme mondiale de pronostics sportifs de référence, propulsée par l'Intelligence Artificielle.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-twitter-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-telegram-logo"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Produit</h3>
+                    <ul>
+                        <li><a href="#fonctionnalites">Fonctionnalités</a></li>
+                        <li><a href="#resultats">Résultats</a></li>
+                        <li><a href="#tarifs">Tarifs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Support & Infos</h3>
+                    <ul>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="terms.html">Conditions d'utilisation</a></li>
+                        <li><a href="privacy.html">Politique de confidentialité</a></li>
+                        <li><a href="responsible-gaming.html">Jeu responsable</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Paiements acceptés</h3>
+                    <div class="payment-icons">
+                        <span class="momo-badge small orange-money">Mobile Money</span>
+                        <span class="momo-badge small moov-africa">Cartes & Crypto</span>
+                    </div>
+                    <p class="warning-text">⚠️ Le pari sportif comporte des risques (endettement, isolement...). Jouez avec modération.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 PredictBet AI. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/22600000000" class="whatsapp-float" target="_blank" aria-label="Contactez-nous sur WhatsApp">
+        <i class="ph-fill ph-whatsapp-logo"></i>
+    </a>
+
+    <!-- MODALS (Auth) -->
+    <div id="modal-login" class="modal-overlay">
+        <div class="modal-content glass-panel">
+            <button class="modal-close"><i class="ph ph-x"></i></button>
+            <h2>Connexion</h2>
+            
+            <div class="auth-social">
+                <button class="btn btn-outline btn-social w-100" id="btn-google-login">
+                    <i class="ph-fill ph-google-logo"></i> Continuer avec Google
+                </button>
+                <button class="btn btn-outline btn-social w-100" id="btn-facebook-login">
+                    <i class="ph-fill ph-facebook-logo"></i> Continuer avec Facebook
+                </button>
+            </div>
+            
+            <div class="auth-separator"><span>OU</span></div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login-email-tab">Email</button>
+                <button class="auth-tab" data-tab="login-phone-tab">Téléphone</button>
+            </div>
+
+            <!-- TAB: EMAIL -->
+            <div id="login-email-tab" class="auth-tab-content active">
+                <form id="form-login">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="login-email" required placeholder="votre@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <div class="password-input-group">
+                            <input type="password" id="login-password" required placeholder="••••••••">
+                            <button type="button" class="toggle-password"><i class="ph ph-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="form-error" id="login-error"></div>
+                    <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+                </form>
+            </div>
+
+            <!-- TAB: PHONE (OTP) -->
+            <div id="login-phone-tab" class="auth-tab-content">
+                <form id="form-login-phone">
+                    <div class="form-group">
+                        <label>Numéro de téléphone</label>
+                        <div class="phone-input-group">
+                            <input type="text" id="login-phone-code" class="phone-code" value="+226" required>
+                            <input type="tel" id="login-phone-number" class="phone-number" required placeholder="Numéro">
+                        </div>
+                    </div>
+                    <div class="form-error" id="login-phone-error"></div>
+                    <button type="submit" class="btn btn-primary w-100">Envoyer le code</button>
+                </form>
+                
+                <form id="form-login-otp" style="display: none;">
+                    <div class="form-group">
+                        <label>Code de vérification (OTP)</label>
+                        <input type="text" id="login-otp-code" required placeholder="123456">
+                    </div>
+                    <div class="form-error" id="login-otp-error"></div>
+                    <button type="submit" class="btn btn-primary w-100">Vérifier et se connecter</button>
+                </form>
+            </div>
+
+            <p class="modal-footer">Pas encore de compte ? <a href="#" data-modal="signup" class="text-gold switch-modal">S'inscrire</a></p>
+        </div>
+    </div>
+
+    <div id="modal-signup" class="modal-overlay">
+        <div class="modal-content glass-panel">
+            <button class="modal-close"><i class="ph ph-x"></i></button>
+            <h2>Créer un compte</h2>
+            
+            <div class="auth-social">
+                <button class="btn btn-outline btn-social w-100" id="btn-google-signup">
+                    <i class="ph-fill ph-google-logo"></i> Continuer avec Google
+                </button>
+                <button class="btn btn-outline btn-social w-100" id="btn-facebook-signup">
+                    <i class="ph-fill ph-facebook-logo"></i> Continuer avec Facebook
+                </button>
+            </div>
+            
+            <div class="auth-separator"><span>OU</span></div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="signup-email-tab">Email</button>
+                <button class="auth-tab" data-tab="signup-phone-tab">Téléphone</button>
+            </div>
+
+            <!-- TAB: EMAIL -->
+            <div id="signup-email-tab" class="auth-tab-content active">
+                <form id="form-signup">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Prénom</label>
+                            <input type="text" id="signup-firstname" required placeholder="John">
+                        </div>
+                        <div class="form-group">
+                            <label>Nom</label>
+                            <input type="text" id="signup-lastname" required placeholder="Doe">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="signup-email" required placeholder="votre@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <div class="password-input-group">
+                            <input type="password" id="signup-password" required placeholder="••••••••">
+                            <button type="button" class="toggle-password"><i class="ph ph-eye"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Confirmer le mot de passe</label>
+                        <div class="password-input-group">
+                            <input type="password" id="signup-password-confirm" required placeholder="••••••••">
+                            <button type="button" class="toggle-password"><i class="ph ph-eye"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="signup-terms" required>
+                        <label for="signup-terms">J'accepte les <a href="terms.html">Conditions d'utilisation</a> et la <a href="privacy.html">Politique de confidentialité</a>.</label>
+                    </div>
+                    <div class="form-error" id="signup-error"></div>
+                    <div class="form-success" id="signup-success"></div>
+                    <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
+                </form>
+            </div>
+
+            <!-- TAB: PHONE (OTP) -->
+            <div id="signup-phone-tab" class="auth-tab-content">
+                <form id="form-signup-phone">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Prénom</label>
+                            <input type="text" id="signup-phone-firstname" required placeholder="John">
+                        </div>
+                        <div class="form-group">
+                            <label>Nom</label>
+                            <input type="text" id="signup-phone-lastname" required placeholder="Doe">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>WhatsApp</label>
+                        <div class="phone-input-group">
+                            <input type="text" id="signup-phone-code" class="phone-code" value="+226" required>
+                            <input type="tel" id="signup-phone-number" class="phone-number" required placeholder="Numéro">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="signup-phone-terms" required>
+                        <label for="signup-phone-terms">J'accepte les <a href="terms.html">Conditions d'utilisation</a> et la <a href="privacy.html">Politique de confidentialité</a>.</label>
+                    </div>
+                    
+                    <div class="form-error" id="signup-phone-error"></div>
+                    <div class="form-success" id="signup-phone-success"></div>
+                    <button type="submit" class="btn btn-primary w-100">Envoyer le code</button>
+                </form>
+                
+                <form id="form-signup-otp" style="display: none;">
+                    <div class="form-group">
+                        <label>Code de vérification (OTP)</label>
+                        <input type="text" id="signup-otp-code" required placeholder="123456">
+                    </div>
+                    <div class="form-error" id="signup-otp-error"></div>
+                    <button type="submit" class="btn btn-primary w-100">Vérifier et créer le compte</button>
+                </form>
+            </div>
+
+            <p class="modal-footer">Déjà un compte ? <a href="#" data-modal="login" class="text-gold switch-modal">Se connecter</a></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="main.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

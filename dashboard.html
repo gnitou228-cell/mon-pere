@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - PredictBet AI</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="dashboard-body">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
+                <i class="ph-fill ph-target"></i>
+                <span>PredictBet AI</span>
+            </a>
+            <button class="close-sidebar d-md-none" id="close-sidebar"><i class="ph ph-x"></i></button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active"><i class="ph ph-squares-four"></i> Dashboard</a>
+            <a href="#" class="nav-item"><i class="ph ph-soccer-ball"></i> Matchs du jour</a>
+            <a href="#" class="nav-item"><i class="ph ph-chart-line-up"></i> Prédictions</a>
+            <a href="#" class="nav-item"><i class="ph ph-ticket"></i> Coupon du jour <span class="badge">1</span></a>
+            <a href="#" class="nav-item"><i class="ph ph-trophy"></i> Résultats</a>
+            <a href="#" class="nav-item"><i class="ph ph-clock-counter-clockwise"></i> Historique</a>
+            <a href="#" class="nav-item"><i class="ph ph-bell"></i> Notifications <span class="badge">3</span></a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item"><i class="ph ph-star"></i> Abonnement</a>
+            <a href="#" class="nav-item"><i class="ph ph-user"></i> Profil</a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="open-sidebar d-md-none" id="open-sidebar"><i class="ph ph-list"></i></button>
+                <div class="search-bar">
+                    <i class="ph ph-magnifying-glass"></i>
+                    <input type="text" placeholder="Rechercher une équipe, un match...">
+                </div>
+            </div>
+            <div class="topbar-right">
+                <button class="icon-btn"><i class="ph ph-bell"></i></button>
+                <div class="user-profile">
+                    <div class="avatar"><i class="ph-fill ph-user"></i></div>
+                    <span id="user-display-name">Utilisateur</span>
+                    <button id="btn-logout-dash" class="icon-btn text-danger ml-2" title="Se déconnecter"><i class="ph ph-sign-out"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <!-- DASHBOARD CONTAINER -->
+        <div class="dashboard-container">
+            
+            <div class="welcome-section">
+                <h1 id="welcome-message">Bonjour 👋</h1>
+                <p class="text-muted">Voici votre résumé pour aujourd'hui.</p>
+            </div>
+
+            <!-- STATS WIDGETS -->
+            <div class="stats-grid">
+                <div class="stat-card glass-panel">
+                    <div class="stat-icon bg-primary-light"><i class="ph ph-chart-bar text-primary"></i></div>
+                    <div class="stat-info">
+                        <h3>14</h3>
+                        <p>Prédictions disponibles</p>
+                    </div>
+                </div>
+                <div class="stat-card glass-panel">
+                    <div class="stat-icon bg-success-light"><i class="ph ph-ticket text-success"></i></div>
+                    <div class="stat-info">
+                        <h3>Prêt</h3>
+                        <p>Coupon du jour</p>
+                    </div>
+                </div>
+                <div class="stat-card glass-panel">
+                    <div class="stat-icon bg-gold-light"><i class="ph ph-trend-up text-gold"></i></div>
+                    <div class="stat-info">
+                        <h3>87%</h3>
+                        <p>Taux de réussite (30j)</p>
+                    </div>
+                </div>
+                <div class="stat-card glass-panel">
+                    <div class="stat-icon bg-danger-light"><i class="ph ph-bell-ringing text-danger"></i></div>
+                    <div class="stat-info">
+                        <h3>3</h3>
+                        <p>Nouvelles notifications</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- MATCHES COLUMN -->
+                <div class="matches-column">
+                    <div class="section-header">
+                        <h2>Top Matchs du Jour</h2>
+                        <a href="#" class="text-primary">Voir tout</a>
+                    </div>
+                    
+                    <!-- MATCH CARD 1 -->
+                    <div class="match-card glass-panel">
+                        <div class="match-header">
+                            <span class="competition"><i class="ph-fill ph-trophy"></i> Ligue des Champions</span>
+                            <span class="time"><i class="ph ph-clock"></i> 20:00</span>
+                        </div>
+                        <div class="match-teams">
+                            <div class="team">
+                                <span class="team-name">Real Madrid</span>
+                            </div>
+                            <div class="vs">VS</div>
+                            <div class="team">
+                                <span class="team-name">Man City</span>
+                            </div>
+                        </div>
+                        <div class="match-prediction">
+                            <div class="pred-type">
+                                <span class="label">Pronostic IA</span>
+                                <span class="value text-primary">Les deux équipes marquent (Oui)</span>
+                            </div>
+                            <div class="pred-confidence">
+                                <span class="label">Confiance</span>
+                                <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+                                <span class="percent text-success">85%</span>
+                            </div>
+                        </div>
+                        <div class="match-actions">
+                            <button class="btn btn-outline btn-sm w-100"><i class="ph ph-chart-pie-slice"></i> Analyse</button>
+                            <button class="btn btn-primary btn-sm w-100"><i class="ph ph-plus"></i> Au coupon</button>
+                        </div>
+                    </div>
+                    
+                    <!-- MATCH CARD 2 -->
+                    <div class="match-card glass-panel">
+                        <div class="match-header">
+                            <span class="competition"><i class="ph-fill ph-trophy"></i> Premier League</span>
+                            <span class="time"><i class="ph ph-clock"></i> 18:30</span>
+                        </div>
+                        <div class="match-teams">
+                            <div class="team">
+                                <span class="team-name">Arsenal</span>
+                            </div>
+                            <div class="vs">VS</div>
+                            <div class="team">
+                                <span class="team-name">Chelsea</span>
+                            </div>
+                        </div>
+                        <div class="match-prediction">
+                            <div class="pred-type">
+                                <span class="label">Pronostic IA</span>
+                                <span class="value text-primary">Victoire Arsenal</span>
+                            </div>
+                            <div class="pred-confidence">
+                                <span class="label">Confiance</span>
+                                <div class="progress-bar"><div class="progress" style="width: 78%;"></div></div>
+                                <span class="percent text-success">78%</span>
+                            </div>
+                        </div>
+                        <div class="match-actions">
+                            <button class="btn btn-outline btn-sm w-100"><i class="ph ph-chart-pie-slice"></i> Analyse</button>
+                            <button class="btn btn-primary btn-sm w-100"><i class="ph ph-plus"></i> Au coupon</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- SIDE COLUMN (COUPON & NOTIFS) -->
+                <div class="side-column">
+                    <div class="coupon-widget glass-panel">
+                        <div class="widget-header">
+                            <h3><i class="ph-fill ph-ticket text-gold"></i> Coupon du Jour</h3>
+                        </div>
+                        <div class="coupon-content">
+                            <div class="coupon-item">
+                                <div class="ci-match">Real Madrid vs Man City</div>
+                                <div class="ci-bet">BTTS - Oui <span class="ci-odds">@1.65</span></div>
+                            </div>
+                            <div class="coupon-item">
+                                <div class="ci-match">Arsenal vs Chelsea</div>
+                                <div class="ci-bet">Victoire Arsenal <span class="ci-odds">@1.90</span></div>
+                            </div>
+                            <div class="coupon-item">
+                                <div class="ci-match">Bayern vs Dortmund</div>
+                                <div class="ci-bet">Over 2.5 Buts <span class="ci-odds">@1.55</span></div>
+                            </div>
+                            
+                            <div class="coupon-summary">
+                                <span>Cote Totale</span>
+                                <span class="total-odds">4.85</span>
+                            </div>
+                            
+                            <button class="btn btn-gold w-100">Voir le coupon détaillé</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- SCRIPTS -->
+    <script src="dashboard.js"></script>
+</body>
+</html>
