@@ -10,6 +10,7 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
     
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
@@ -28,18 +29,18 @@
         </div>
         
         <nav class="sidebar-nav">
-            <a href="#" class="nav-item active"><i class="ph ph-squares-four"></i> Dashboard</a>
-            <a href="#" class="nav-item"><i class="ph ph-soccer-ball"></i> Matchs du jour</a>
-            <a href="#" class="nav-item"><i class="ph ph-chart-line-up"></i> Prédictions</a>
-            <a href="#" class="nav-item"><i class="ph ph-ticket"></i> Coupon du jour <span class="badge">1</span></a>
-            <a href="#" class="nav-item"><i class="ph ph-trophy"></i> Résultats</a>
-            <a href="#" class="nav-item"><i class="ph ph-clock-counter-clockwise"></i> Historique</a>
-            <a href="#" class="nav-item"><i class="ph ph-bell"></i> Notifications <span class="badge">3</span></a>
+            <a href="#" class="nav-item active" data-target="view-dashboard"><i class="ph ph-squares-four"></i> Dashboard</a>
+            <a href="#" class="nav-item" data-target="view-matches"><i class="ph ph-soccer-ball"></i> Matchs du jour</a>
+            <a href="#" class="nav-item" data-target="view-predictions"><i class="ph ph-chart-line-up"></i> Prédictions</a>
+            <a href="#" class="nav-item" data-target="view-coupon"><i class="ph ph-ticket"></i> Coupon du jour <span class="badge" id="badge-coupon" style="display:none;">0</span></a>
+            <a href="#" class="nav-item" data-target="view-results"><i class="ph ph-trophy"></i> Résultats</a>
+            <a href="#" class="nav-item" data-target="view-history"><i class="ph ph-clock-counter-clockwise"></i> Historique</a>
+            <a href="#" class="nav-item" data-target="view-notifications"><i class="ph ph-bell"></i> Notifications <span class="badge" id="badge-notif" style="display:none;">0</span></a>
         </nav>
         
         <div class="sidebar-footer">
-            <a href="#" class="nav-item"><i class="ph ph-star"></i> Abonnement</a>
-            <a href="#" class="nav-item"><i class="ph ph-user"></i> Profil</a>
+            <a href="#" class="nav-item" data-target="view-subscription"><i class="ph ph-star"></i> Abonnement</a>
+            <a href="#" class="nav-item" data-target="view-profile"><i class="ph ph-user"></i> Profil</a>
         </div>
     </aside>
 
@@ -48,17 +49,17 @@
         <!-- TOPBAR -->
         <header class="topbar">
             <div class="topbar-left">
-                <button class="open-sidebar d-md-none" id="open-sidebar"><i class="ph ph-list"></i></button>
+                <button class="icon-btn open-sidebar d-md-none" id="open-sidebar"><i class="ph ph-list" style="font-size: 1.5rem; color: var(--c-primary);"></i></button>
                 <div class="search-bar">
                     <i class="ph ph-magnifying-glass"></i>
                     <input type="text" placeholder="Rechercher une équipe, un match...">
                 </div>
             </div>
             <div class="topbar-right">
-                <button class="icon-btn"><i class="ph ph-bell"></i></button>
+                <button class="icon-btn" onclick="document.querySelector('[data-target=\\'view-notifications\\']').click()"><i class="ph ph-bell"></i></button>
                 <div class="user-profile">
                     <div class="avatar"><i class="ph-fill ph-user"></i></div>
-                    <span id="user-display-name">Utilisateur</span>
+                    <span id="user-display-name">Chargement...</span>
                     <button id="btn-logout-dash" class="icon-btn text-danger ml-2" title="Se déconnecter"><i class="ph ph-sign-out"></i></button>
                 </div>
             </div>
@@ -67,145 +68,190 @@
         <!-- DASHBOARD CONTAINER -->
         <div class="dashboard-container">
             
-            <div class="welcome-section">
-                <h1 id="welcome-message">Bonjour 👋</h1>
-                <p class="text-muted">Voici votre résumé pour aujourd'hui.</p>
+            <!-- VIEW: DASHBOARD (ACCUEIL) -->
+            <div id="view-dashboard" class="view-section active">
+                <div class="welcome-section">
+                    <h1 id="welcome-message">Bonjour 👋</h1>
+                    <p class="text-muted">Voici votre résumé pour aujourd'hui.</p>
+                </div>
+
+                <!-- STATS GLOABLES -->
+                <div class="stats-grid">
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon bg-primary-light"><i class="ph ph-chart-bar text-primary"></i></div>
+                        <div class="stat-info">
+                            <h3 id="stat-predictions">0</h3>
+                            <p>Prédictions disponibles</p>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon bg-success-light"><i class="ph ph-ticket text-success"></i></div>
+                        <div class="stat-info">
+                            <h3 id="stat-coupon">Vide</h3>
+                            <p>Coupon du jour</p>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon bg-gold-light"><i class="ph ph-trend-up text-gold"></i></div>
+                        <div class="stat-info">
+                            <h3 id="stat-success">--%</h3>
+                            <p>Taux de réussite (30j)</p>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <div class="stat-icon bg-danger-light"><i class="ph ph-bell-ringing text-danger"></i></div>
+                        <div class="stat-info">
+                            <h3 id="stat-notifs">0</h3>
+                            <p>Nouvelles notifications</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- MATCHES COLUMN -->
+                    <div class="matches-column">
+                        <div class="section-header">
+                            <h2>Top Matchs du Jour</h2>
+                            <a href="#" class="text-primary" onclick="document.querySelector('[data-target=\\'view-matches\\']').click()">Voir tout</a>
+                        </div>
+                        <div id="dashboard-matches-container">
+                            <!-- Loader ou Empty state -->
+                            <div class="empty-state glass-panel">
+                                <i class="ph ph-spinner ph-spin"></i>
+                                <p>Chargement des données...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SIDE COLUMN (COUPON & NOTIFS) -->
+                    <div class="side-column">
+                        <div class="coupon-widget glass-panel">
+                            <div class="widget-header">
+                                <h3><i class="ph-fill ph-ticket text-gold"></i> Coupon du Jour</h3>
+                            </div>
+                            <div class="coupon-content" id="dashboard-coupon-container">
+                                <!-- Loader ou Empty state -->
+                                <div class="empty-state">
+                                    <p>Votre coupon est vide.</p>
+                                    <button class="btn btn-outline btn-sm" onclick="document.querySelector('[data-target=\\'view-matches\\']').click()">Parcourir les matchs</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- STATS WIDGETS -->
-            <div class="stats-grid">
-                <div class="stat-card glass-panel">
-                    <div class="stat-icon bg-primary-light"><i class="ph ph-chart-bar text-primary"></i></div>
-                    <div class="stat-info">
-                        <h3>14</h3>
-                        <p>Prédictions disponibles</p>
-                    </div>
+            <!-- VIEW: MATCHES -->
+            <div id="view-matches" class="view-section">
+                <div class="section-header">
+                    <h2>Matchs du Jour</h2>
                 </div>
-                <div class="stat-card glass-panel">
-                    <div class="stat-icon bg-success-light"><i class="ph ph-ticket text-success"></i></div>
-                    <div class="stat-info">
-                        <h3>Prêt</h3>
-                        <p>Coupon du jour</p>
-                    </div>
+                <div id="full-matches-container">
+                    <!-- Dynamique -->
                 </div>
-                <div class="stat-card glass-panel">
-                    <div class="stat-icon bg-gold-light"><i class="ph ph-trend-up text-gold"></i></div>
-                    <div class="stat-info">
-                        <h3>87%</h3>
-                        <p>Taux de réussite (30j)</p>
-                    </div>
+            </div>
+
+            <!-- VIEW: PREDICTIONS -->
+            <div id="view-predictions" class="view-section">
+                <div class="section-header">
+                    <h2>Toutes les Prédictions</h2>
                 </div>
-                <div class="stat-card glass-panel">
-                    <div class="stat-icon bg-danger-light"><i class="ph ph-bell-ringing text-danger"></i></div>
-                    <div class="stat-info">
-                        <h3>3</h3>
-                        <p>Nouvelles notifications</p>
+                <div id="predictions-container">
+                    <div class="empty-state glass-panel">
+                        <i class="ph ph-chart-line-up"></i>
+                        <p>Aucune prédiction générée pour le moment.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="dashboard-grid">
-                <!-- MATCHES COLUMN -->
-                <div class="matches-column">
-                    <div class="section-header">
-                        <h2>Top Matchs du Jour</h2>
-                        <a href="#" class="text-primary">Voir tout</a>
-                    </div>
-                    
-                    <!-- MATCH CARD 1 -->
-                    <div class="match-card glass-panel">
-                        <div class="match-header">
-                            <span class="competition"><i class="ph-fill ph-trophy"></i> Ligue des Champions</span>
-                            <span class="time"><i class="ph ph-clock"></i> 20:00</span>
-                        </div>
-                        <div class="match-teams">
-                            <div class="team">
-                                <span class="team-name">Real Madrid</span>
-                            </div>
-                            <div class="vs">VS</div>
-                            <div class="team">
-                                <span class="team-name">Man City</span>
-                            </div>
-                        </div>
-                        <div class="match-prediction">
-                            <div class="pred-type">
-                                <span class="label">Pronostic IA</span>
-                                <span class="value text-primary">Les deux équipes marquent (Oui)</span>
-                            </div>
-                            <div class="pred-confidence">
-                                <span class="label">Confiance</span>
-                                <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
-                                <span class="percent text-success">85%</span>
-                            </div>
-                        </div>
-                        <div class="match-actions">
-                            <button class="btn btn-outline btn-sm w-100"><i class="ph ph-chart-pie-slice"></i> Analyse</button>
-                            <button class="btn btn-primary btn-sm w-100"><i class="ph ph-plus"></i> Au coupon</button>
-                        </div>
-                    </div>
-                    
-                    <!-- MATCH CARD 2 -->
-                    <div class="match-card glass-panel">
-                        <div class="match-header">
-                            <span class="competition"><i class="ph-fill ph-trophy"></i> Premier League</span>
-                            <span class="time"><i class="ph ph-clock"></i> 18:30</span>
-                        </div>
-                        <div class="match-teams">
-                            <div class="team">
-                                <span class="team-name">Arsenal</span>
-                            </div>
-                            <div class="vs">VS</div>
-                            <div class="team">
-                                <span class="team-name">Chelsea</span>
-                            </div>
-                        </div>
-                        <div class="match-prediction">
-                            <div class="pred-type">
-                                <span class="label">Pronostic IA</span>
-                                <span class="value text-primary">Victoire Arsenal</span>
-                            </div>
-                            <div class="pred-confidence">
-                                <span class="label">Confiance</span>
-                                <div class="progress-bar"><div class="progress" style="width: 78%;"></div></div>
-                                <span class="percent text-success">78%</span>
-                            </div>
-                        </div>
-                        <div class="match-actions">
-                            <button class="btn btn-outline btn-sm w-100"><i class="ph ph-chart-pie-slice"></i> Analyse</button>
-                            <button class="btn btn-primary btn-sm w-100"><i class="ph ph-plus"></i> Au coupon</button>
-                        </div>
-                    </div>
-
+            <!-- VIEW: COUPON -->
+            <div id="view-coupon" class="view-section">
+                <div class="section-header">
+                    <h2>Gestion du Coupon</h2>
                 </div>
-
-                <!-- SIDE COLUMN (COUPON & NOTIFS) -->
-                <div class="side-column">
-                    <div class="coupon-widget glass-panel">
-                        <div class="widget-header">
-                            <h3><i class="ph-fill ph-ticket text-gold"></i> Coupon du Jour</h3>
-                        </div>
-                        <div class="coupon-content">
-                            <div class="coupon-item">
-                                <div class="ci-match">Real Madrid vs Man City</div>
-                                <div class="ci-bet">BTTS - Oui <span class="ci-odds">@1.65</span></div>
-                            </div>
-                            <div class="coupon-item">
-                                <div class="ci-match">Arsenal vs Chelsea</div>
-                                <div class="ci-bet">Victoire Arsenal <span class="ci-odds">@1.90</span></div>
-                            </div>
-                            <div class="coupon-item">
-                                <div class="ci-match">Bayern vs Dortmund</div>
-                                <div class="ci-bet">Over 2.5 Buts <span class="ci-odds">@1.55</span></div>
-                            </div>
-                            
-                            <div class="coupon-summary">
-                                <span>Cote Totale</span>
-                                <span class="total-odds">4.85</span>
-                            </div>
-                            
-                            <button class="btn btn-gold w-100">Voir le coupon détaillé</button>
-                        </div>
+                <div id="full-coupon-container" class="glass-panel" style="padding: 2rem;">
+                    <div class="empty-state">
+                        <i class="ph ph-ticket"></i>
+                        <p>Votre coupon est actuellement vide.</p>
                     </div>
+                </div>
+            </div>
+
+            <!-- VIEW: RESULTS -->
+            <div id="view-results" class="view-section">
+                <div class="section-header">
+                    <h2>Résultats Récents</h2>
+                </div>
+                <div class="empty-state glass-panel">
+                    <i class="ph ph-trophy"></i>
+                    <p>Les résultats des matchs seront affichés ici.</p>
+                </div>
+            </div>
+
+            <!-- VIEW: HISTORY -->
+            <div id="view-history" class="view-section">
+                <div class="section-header">
+                    <h2>Historique Personnel</h2>
+                </div>
+                <div class="empty-state glass-panel">
+                    <i class="ph ph-clock-counter-clockwise"></i>
+                    <p>Vous n'avez pas encore d'historique de paris.</p>
+                </div>
+            </div>
+
+            <!-- VIEW: NOTIFICATIONS -->
+            <div id="view-notifications" class="view-section">
+                <div class="section-header">
+                    <h2>Vos Notifications</h2>
+                </div>
+                <div id="notifications-container">
+                    <div class="empty-state glass-panel">
+                        <i class="ph ph-bell-slash"></i>
+                        <p>Vous n'avez aucune nouvelle notification.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: SUBSCRIPTION -->
+            <div id="view-subscription" class="view-section">
+                <div class="section-header">
+                    <h2>Mon Abonnement</h2>
+                </div>
+                <div class="glass-panel" style="padding: 2rem;">
+                    <h3>Statut : <span class="text-success">Gratuit</span></h3>
+                    <p class="text-muted">Passez à un plan premium pour accéder à 100% des prédictions IA.</p>
+                    <button class="btn btn-primary" style="margin-top: 1rem;"><i class="ph ph-star"></i> Découvrir les plans</button>
+                </div>
+            </div>
+
+            <!-- VIEW: PROFILE -->
+            <div id="view-profile" class="view-section">
+                <div class="section-header">
+                    <h2>Mon Profil</h2>
+                </div>
+                <div class="glass-panel" style="padding: 2rem; max-width: 600px;">
+                    <form id="form-update-profile">
+                        <div class="form-group" style="margin-bottom: 1rem;">
+                            <label>Prénom</label>
+                            <input type="text" id="profile-firstname" class="form-control" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ccc; margin-top: 0.5rem;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 1rem;">
+                            <label>Nom</label>
+                            <input type="text" id="profile-lastname" class="form-control" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ccc; margin-top: 0.5rem;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 1rem;">
+                            <label>Email</label>
+                            <input type="email" id="profile-email" class="form-control" disabled style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ccc; margin-top: 0.5rem; background: #f5f5f5;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 1.5rem;">
+                            <label>WhatsApp</label>
+                            <input type="text" id="profile-whatsapp" class="form-control" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #ccc; margin-top: 0.5rem;">
+                        </div>
+                        
+                        <div id="profile-msg" style="margin-bottom: 1rem; display: none;"></div>
+                        
+                        <button type="submit" class="btn btn-primary w-100">Enregistrer les modifications</button>
+                    </form>
                 </div>
             </div>
 

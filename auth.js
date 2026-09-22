@@ -82,9 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==========================================================================
        SUPABASE CONFIGURATION
        ========================================================================== */
-    // REPLACE THESE WITH YOUR ACTUAL SUPABASE URL AND ANON KEY
-    const SUPABASE_URL = 'https://VOTRE_PROJET.supabase.co';
-    const SUPABASE_ANON_KEY = 'VOTRE_CLE_ANON';
+    const SUPABASE_URL = window.ENV ? window.ENV.SUPABASE_URL : 'https://VOTRE_PROJET.supabase.co';
+    const SUPABASE_ANON_KEY = window.ENV ? window.ENV.SUPABASE_ANON_KEY : 'VOTRE_CLE_ANON';
 
     let supabase;
     
@@ -92,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (SUPABASE_URL !== 'https://VOTRE_PROJET.supabase.co') {
         supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     } else {
-        console.warn("Supabase n'est pas configuré. Veuillez insérer vos clés dans auth.js.");
+        console.warn("Supabase n'est pas configuré. Veuillez insérer vos clés dans config.js.");
     }
 
     /* ==========================================================================
@@ -160,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.textContent = 'Se connecter';
                 submitBtn.disabled = false;
             } else {
-                window.location.href = 'dashboard.html';
+                window.location.href = './dashboard.html';
             }
         });
     }
@@ -316,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.textContent = 'Vérifier et se connecter';
                 submitBtn.disabled = false;
             } else {
-                window.location.href = 'dashboard.html';
+                window.location.href = './dashboard.html';
             }
         });
     }
@@ -416,7 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.textContent = 'Vérifier et créer le compte';
                 submitBtn.disabled = false;
             } else {
-                window.location.href = 'dashboard.html';
+                window.location.href = './dashboard.html';
             }
         });
     }
@@ -427,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (supabase) {
         supabase.auth.onAuthStateChange((event, session) => {
             if (session && !window.location.pathname.includes('dashboard.html')) {
-                window.location.href = 'dashboard.html';
+                window.location.href = './dashboard.html';
             }
         });
     }
